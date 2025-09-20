@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url('pictures/project5.avif');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 400px;
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        .block img.pic {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .heading {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .user {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .user:focus {
+            border-color: #0a0a40;
+            box-shadow: 0 0 5px rgba(10, 10, 64, 0.3);
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .check {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .text2 {
+            font-size: 14px;
+        }
+
+        .login {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(10, 10, 64);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .login:hover {
+            background-color: rgb(38, 28, 230);
+        }
+
+        .register-link {
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: rgb(10, 10, 64);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="block">
+        <img src="PictureFolder/1.png" class="pic" alt="Logo">
+        <div class="heading">READING SEED</div>
+
+        <label class="text" for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter a valid username" class="user">
+
+        <label class="text" for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" class="user">
+
+        <div class="box">
+            <input type="checkbox" class="check" id="remember">
+            <label class="text2" for="remember">Remember me</label>
+        </div>
+
+        <button class="login" id="loginBtn">Login</button>
+
+        <div class="register-link">
+            Don't have an account? <a href="Registration.html">Register here</a>
+        </div>
+    </div>
+
+    <script>
+    const loginBtn = document.getElementById('loginBtn');
+
+    loginBtn.addEventListener('click', async () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if(!username || !password){
+            alert("Please fill all fields");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if(data.success){
+                alert('Login successful!');
+
+                if(document.getElementById('remember').checked){
+                    localStorage.setItem('token', data.token); // persists
+                } else {
+                    sessionStorage.setItem('token', data.token); // cleared on browser close
+                }
+
+                window.location.href = 'dashboard.html';
+            } else {
+                alert(data.message);
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Server error. Please try again later.');
+        }
+    });
+</script>
+
+</body>
+</html>

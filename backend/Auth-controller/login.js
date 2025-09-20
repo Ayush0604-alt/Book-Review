@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password,rememberMe } = req.body;
     const user = await User.findOne({ username });
     
     if (!user) {
@@ -28,7 +28,7 @@ const login = async (req, res) => {
         username: user.username 
       },
       process.env.JWT_SECRET, 
-      { expiresIn: '1h' } 
+      {  expiresIn: rememberMe ? '7d' : '5h'} 
     );
 
     return res.status(200).json({

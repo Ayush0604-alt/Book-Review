@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+    <style>
+        body {
+            background-image: url('pictures/project5.avif');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            width: 400px;
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        .block img.pic {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .heading {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .user {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .user:focus {
+            border-color: #0a0a40;
+            box-shadow: 0 0 5px rgba(10, 10, 64, 0.3);
+        }
+
+        .register {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: rgb(10, 10, 64);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .register:hover {
+            background-color: rgb(38, 28, 230);
+        }
+
+        .login-link {
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: rgb(10, 10, 64);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="block">
+        <img src="PictureFolder/1.png" class="pic" alt="Logo">
+        <div class="heading">CREATE ACCOUNT</div>
+
+        <label class="text" for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username" class="user">
+
+        <label class="text" for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter email" class="user">
+
+        <label class="text" for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" class="user">
+
+        <button class="register" id="registerBtn">Register</button>
+
+        <div class="login-link">
+            Already have an account? <a href="Login.html">Login here</a>
+        </div>
+    </div>
+
+    <script>
+        const registerBtn = document.getElementById('registerBtn');
+
+        registerBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if(!username || !email || !password){
+                alert("Please fill all fields");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if(data.success){
+                    alert('Registration successful! You can now login.');
+                    window.location.href = 'Login-page.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Server error. Please try again later.');
+            }
+        });
+    </script>
+</body>
+</html>
