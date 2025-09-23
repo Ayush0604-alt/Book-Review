@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+        }
+
+        .top-bar {
+            background-color: #0077b6; /* professional blue */
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Logo */
+        .top-bar img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        /* Search box */
+        .searchbox-div {
+            display: flex;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .searchbox {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-button {
+            padding: 8px 14px;
+            font-size: 14px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #023e8a;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #03045e;
+        }
+
+        /* Navbar buttons */
+        .navbar {
+            display: flex;
+            gap: 12px;
+        }
+
+        .navbar button {
+            padding: 7px 14px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: #0096c7;
+            color: #fff;
+            transition: background 0.3s;
+        }
+
+        .navbar button:hover {
+            background-color: #00b4d8;
+        }
+
+        /* History button */
+        .history-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .history-scroll {
+            width: 30px;
+            height: 25px;
+        }
+
+        /* Profile dropdown */
+        .profile {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .profile-button {
+            background-color: #023e8a;
+            color: #fff;
+            padding: 7px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #03045e;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 45px;
+            background-color: #fff;
+            color: #000;
+            min-width: 150px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .profile-dropdown a {
+            color: #000;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .profile:hover .profile-dropdown {
+            display: block;
+        }
+        .Left-side{
+            display:flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="PictureFolder/1.png" alt="Logo">
+
+        <!-- Search box -->
+        <div class="searchbox-div">
+            <input type="text" placeholder="Search Books by Name or Author" class="searchbox">
+            <button class="search-button">Search</button>
+        </div>
+        <!-- History -->
+       
+
+        <div class="Left-side">
+            <div class="history">
+            <button class="history-button">
+                <img src="PictureFolder/scroll.avif" class="history-scroll" alt="History">
+            </button>
+        </div> 
+        <div class="profile">
+            <button class="profile-button">
+                <img src="PictureFolder/profile.jpg" alt="User" width="25" height="25" style="border-radius:50%;">
+            </button>
+            <div class="profile-dropdown">
+                <a href="Profile.html">View Profile</a>
+                <a href="Login-Page.html">Logout</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>

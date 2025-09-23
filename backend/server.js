@@ -3,6 +3,8 @@ const express=require('express');
 const connectToDB=require('./Database/db');
 const cors=require('cors');
 const bookReview=require('./Router/authRouter');
+const path = require('path');
+
 
 
 const app=express();
@@ -14,6 +16,8 @@ app.use(cors());
 
 //routes
 app.use('/api',bookReview);
+app.use('/images', express.static(path.join(__dirname, 'BooksPicture')));
+
 
 const PORT=process.env.PORT;
 
